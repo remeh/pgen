@@ -12,8 +12,13 @@ import (
 
 var textures []*sdl.Surface
 
+type Renderer interface {
+	Render(surface *sdl.Surface) error
+}
+
 func loadRes() error {
-	// charger tout les .png dans res/textures
+	// load every PNGs and JPGs available
+	// in res/textures
 	files, err := ioutil.ReadDir("res/textures")
 	if err != nil {
 		return err
@@ -23,7 +28,6 @@ func loadRes() error {
 		if file.IsDir() {
 			continue
 		}
-
 		if strings.HasSuffix(file.Name(), "png") ||
 			strings.HasSuffix(file.Name(), "jpg") {
 			s, err := img.Load("res/textures/" + file.Name())
@@ -39,15 +43,7 @@ func loadRes() error {
 		return fmt.Errorf("didn't find any textures in res/textures/")
 	}
 
-	return nil
-}
+	log.Println("loaded", len(textures), "textures")
 
-func render(surface *sdl.Surface) error {
-	if err := loadRes(); err != nil {
-		return fmt.Errorf("while loading resources: %v", err)
-	}
-
-	rect := sdl.Rect{0, 0, 200, 200}
-	surface.FillRect(&rect, 0xffff0000)
 	return nil
 }

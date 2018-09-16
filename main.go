@@ -18,7 +18,7 @@ func main() {
 
 	// create the surface we'll render on
 
-	surface, err := sdl.CreateRGBSurfaceWithFormat(0, 1920, 1080, 32, uint32(sdl.PIXELFORMAT_RGBA32))
+	surface, err := sdl.CreateRGBSurfaceWithFormat(0, 1920, 1080, 32, uint32(sdl.PIXELFORMAT_ABGR32))
 	if err != nil {
 		log.Fatalf("err: can't create the dest surface: %v", err)
 	}
@@ -26,7 +26,8 @@ func main() {
 
 	// start drawing on the surface
 
-	if err := render(surface); err != nil {
+	r := NewRandomRenderer(10000)
+	if err := r.Render(surface); err != nil {
 		log.Fatalf("err: %v", err)
 	}
 
