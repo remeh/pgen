@@ -26,7 +26,7 @@ func main() {
 
 	// start drawing on the surface
 
-	r := NewRandomRenderer(150)
+	r := NewRandomRenderer(1500)
 	if err := r.Render(surface); err != nil {
 		log.Fatalf("err: %v", err)
 	}

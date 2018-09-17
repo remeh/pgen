@@ -28,6 +28,7 @@ func (r *Random) Render(surface *sdl.Surface) error {
 	rect := sdl.Rect{0, 0, surface.W, surface.H}
 	surface.FillRect(&rect, 0x151515ff)
 
+	// draw particles
 	for i := 0; i < r.particles; i++ {
 		if err := r.one(surface); err != nil {
 			return err
@@ -54,6 +55,8 @@ func (r *Random) one(surface *sdl.Surface) error {
 		}
 	}
 
+	t.SetBlendMode(sdl.BLENDMODE_ADD)
+	t.SetColorMod(0xFF, 0x50, 0x00)
 	t.SetAlphaMod(uint8(rand.Int()))
 
 	return t.BlitScaled(nil, surface, &sdl.Rect{w, h, s, s})
