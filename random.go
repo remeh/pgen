@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"time"
 
 	"github.com/veandco/go-sdl2/sdl"
 )
@@ -12,6 +13,7 @@ type Random struct {
 }
 
 func NewRandomRenderer(particles int) *Random {
+	rand.Seed(time.Now().Unix())
 	return &Random{
 		particles: particles,
 	}
