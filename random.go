@@ -47,12 +47,14 @@ func (r *Random) one(surface *sdl.Surface) error {
 	for {
 		w = int32(rand.Intn(int(surface.W)))
 		h = int32(rand.Intn(int(surface.H)))
-		s = 16 + int32(rand.Intn(128))
+		s = 16 + int32(rand.Intn(72))
 
 		if w+s < surface.W && h+s < surface.H {
 			break
 		}
 	}
+
+	t.SetAlphaMod(uint8(rand.Int()))
 
 	return t.BlitScaled(nil, surface, &sdl.Rect{w, h, s, s})
 }
